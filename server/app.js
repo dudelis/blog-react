@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 
 const v1 = require('./routes/v1');
-const db = require('./db');
 const CONFIG = require('./config');
 
 const app = express();
