@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const PostSchema = Schema({
-    title: { type: String },
+    title: {
+        type: String,
+        required: true,
+    },
     content: { type: String },
     category: { type: Schema.Types.ObjectId, ref: 'Category' },
     tags: { type: [Schema.Types.ObjectId], ref: 'Tag' },

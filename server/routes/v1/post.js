@@ -2,13 +2,14 @@ const express = require('express');
 
 const router = express.Router();
 
-const Post = require('../../models/post.model');
+const Post = require('../../models/post');
 const { respSuccess, respError } = require('../../utils');
 
 // POST /post
 router.post('/', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     const post = req.body;
+    console.log(post);
     Post.create(post).then(
         result => respSuccess(res, result, 201),
         err => respError(res, err, 422),
@@ -18,6 +19,16 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     Post.find().then(
+        result => respSuccess(res, result, 201),
+        error => respError(res, error, 422),
+    );
+});
+// PATCH /post/:id
+router.patch('/:id', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    const { id } = req.params;
+    const post = req.body;
+    Post.findByIdAndUpdate(id, post).then(
         result => respSuccess(res, result, 201),
         error => respError(res, error, 422),
     );
